@@ -1,0 +1,35 @@
+<div mat-dialog-title>
+    <h1>Employe Form</h1>
+</div>
+<form [formGroup]="bookForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Nom</mat-label>
+        <input matInput type="text" formControlName="intitule">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Auteur</mat-label>
+            <input matInput type="text" placeholder="Entrer le nom de l'Auteur" formControlName="auteur">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Editeur</mat-label>
+            <input matInput type="text" placeholder="Entrer le nom de l'Editeur" formControlName="editeur">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="annee">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="action">
+        <button mat-raised-button (click)="close()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+    </div>
+
+
