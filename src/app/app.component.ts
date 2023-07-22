@@ -29,6 +29,7 @@ export class AppComponent implements OnInit,AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  // ouvrir popup ajout livre et refraiche liste apres l'ajout 
   openAddBookComponent(){
     const dialogRef = this._dialog.open(AddBookComponent)
     dialogRef.afterClosed().subscribe(() => {
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit,AfterViewInit {
     });
 
   }
-
+// filtrage
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     console.log(this.dataSource);
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit,AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  // liste des livres
   getBooks(){
     this._bookservice.getBooks().subscribe({
       next: (res) => {
@@ -57,7 +59,8 @@ export class AppComponent implements OnInit,AfterViewInit {
           
       },error: console.error,
     })  }
-    deleteBook(id:number){
+  // suppression d'un livre
+  deleteBook(id:number){
       console.log(id);
       
       this._bookservice.deleteBook(id).subscribe({
@@ -69,7 +72,8 @@ export class AppComponent implements OnInit,AfterViewInit {
         
       })
     }
-    EditBook(data:any) {
+    //modification d'un livre et refresh de la liste des livres
+  EditBook(data:any) {
       const dialogRef = this._dialog.open(AddBookComponent , {
         data,
       

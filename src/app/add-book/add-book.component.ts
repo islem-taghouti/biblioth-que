@@ -28,12 +28,16 @@ export class AddBookComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data) {
+      // pour remplir les valeurs des inputs lors de modif
       this.bookForm.patchValue(this.data);
     }
   }
 
   onFormSubmit() {
+
+    // V"rification si le formulaire est valide 
     if (this.bookForm.valid) {
+      // edit
       if (this.data) {
         console.log(this.bookForm.value);
         this._bookservice.editBook(this.data.id, this.bookForm.value).subscribe({
@@ -45,7 +49,9 @@ export class AddBookComponent implements OnInit {
             console.error(err);
           }
         });
-      } else {
+      
+      } // ajout d'un livre
+       else {
         console.log(this.bookForm.value);
         this._bookservice.addBook(this.bookForm.value).subscribe({
           next: (val: any) => {
@@ -57,13 +63,14 @@ export class AddBookComponent implements OnInit {
           }
         });
       }
-    } else {
+    } // si le formulaire n'est pas valide 
+    else {
       Object.keys(this.bookForm.controls).forEach((key: string) => {
         this.bookForm.controls[key].markAsTouched();
       });
     }
   }
-
+// cancel
   close() {
     this._dialogRef.close();
   }
